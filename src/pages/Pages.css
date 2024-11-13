@@ -1,0 +1,459 @@
+/* Estilos generales para la página */
+.style-celulares {
+   display: flex;
+   text-align: center;
+   flex-direction: column;
+}
+
+.style-celulares h1 {
+   color: #ffd900;
+   font-weight: bold;
+   font-size: 55px;
+   text-shadow: -2px -1px 9px rgba(206, 175, 0, 0.904);
+}
+
+.create{
+   width: 150px;
+   margin: 10px;
+   margin-left: 60px;
+   background-color: #FFD900;
+   color: black;
+   border: 2px solid grey;
+}
+
+#btn-volver {
+   background-color: #3498db;
+   color: #ffffff;
+   border-radius: 10px;
+   cursor: pointer;
+   font-size: 18px;
+   padding: 10px 20px;
+   margin: 15px auto 30px;
+   text-align: center;
+}
+
+.search-phone {
+   border-radius: 15px;
+}
+
+#search {
+   border-radius: 10px;
+   border: 3px solid #ebc700;
+   width: 600px;
+   font-size: 18px;
+   margin-right: 15px;
+   padding: 10px 20px;
+   cursor: pointer;
+}
+
+#btn-search {
+   background-color: #ebc700;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   width: 100px;
+   font-size: 18px;
+   padding: 10px 20px;
+}
+
+.results {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+   flex-wrap: wrap;
+   width: 100%;
+   margin-top: 20px;
+}
+
+.results-card {
+   background-color: #f5f5f5;
+   border-radius: 5px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   margin: 15px;
+   padding: 15px;
+   width: 250px;
+   height: 550px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-between;
+   border: 2px solid #ebc700;
+}
+
+.results-card img {
+   width: 180px;
+   height: auto;
+   zoom: 130%;   
+   border-radius: 5px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   margin-bottom: 10px;
+}
+
+.results-card h3 {
+   font-size: 20px;
+   font-weight: bold;
+   color: #2c3e50;
+   margin-bottom: 8px;
+}
+
+.results-card p {
+   font-size: 14px;
+   margin-bottom: 1px;
+   color: black;
+}
+
+.results-card a {
+   font-size: 16px;
+   color: #2c3e50;
+   text-decoration: none;
+   font-weight: bold;
+   text-align: center;
+   margin-top: 10px;
+}
+
+.results-card a:hover {
+   color: #3498db;
+   text-decoration: underline;
+}
+
+.results-card button {
+   background-color: #3498db;
+   color: #ffffff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+   padding: 8px 16px;
+   margin-top: 10px;
+}
+
+.results-card button:hover {
+   background-color: #2980b9;
+}
+
+.edit-form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background-color: #ffffff;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   padding: 20px;
+   width: 100%;
+   max-width: 500px;
+   margin: 20px auto;
+   border: 2px solid #ebc700;
+}
+
+.edit-form h2 {
+   color: #2c3e50;
+   font-size: 24px;
+   font-weight: bold;
+   margin-bottom: 20px;
+}
+
+.edit-form input {
+   width: 90%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border: 2px solid #ebc700;
+   border-radius: 5px;
+   font-size: 16px;
+}
+
+.edit-form button {
+   background-color: #27ae60;
+   color: #ffffff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+   padding: 10px 20px;
+   margin-top: 10px;
+}
+
+.edit-form button:hover {
+   background-color: #219150;
+}
+
+.edit-form .cancel-button {
+   background-color: #e74c3c;
+   margin-top: 5px;
+}
+
+.edit-form .cancel-button:hover {
+   background-color: #c0392b;
+}
+
+.delete-btn {
+   background-color: #e74c3c;
+   color: #ffffff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+   padding: 10px 20px;
+   margin-top: 15px;
+   transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.delete-btn:hover {
+   background-color: #c0392b;
+   transform: scale(1.1);
+}
+
+.delete-btn:focus {
+   outline: none;
+   box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.5);
+}
+
+.delete-btn:active {
+   background-color: #e74c3c;
+   transform: scale(0.98);
+}
+
+.modal-create {
+   background-color: rgba(0, 0, 0, 0.5);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 1000;
+}
+
+.modal-content {
+   background-color: #dfdede;
+   padding: 30px;
+   border-radius: 10px;
+   width: 500px;
+   max-height: 600px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+   overflow-y: auto;
+
+}
+
+.modal-content h2 {
+   font-size: 24px;
+   color: #2c3e50;
+   margin-bottom: 20px;
+   text-align: center;
+}
+
+.modal-content label {
+   font-size: 16px;
+   color: black;
+   margin-bottom: 8px;
+   display: block;
+}
+
+.modal-content input {
+   width: 300px;
+   padding: 12px;
+   margin-bottom: 15px;
+   border: 2px solid #3498db;
+   border-radius: 8px;
+   font-size: 16px;
+   color: #9a9a9b;
+}
+
+.modal-content button {
+   background-color: #3498db;
+   color: #ffffff;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+   margin-top: 10px;
+   width: 100%;
+}
+
+
+
+.modal-content button:hover {
+   background-color: #2980b9;
+}
+
+.modal-content .cancel-button {
+   background-color: #e74c3c;
+   margin-top: 5px;
+}
+
+.modal-content .cancel-button:hover {
+   background-color: #c0392b;
+}
+
+.create-btn {
+   background-color: #27ae60;
+   color: #ffffff;
+   font-size: 16px;
+   font-weight: bold;
+   padding: 12px 24px;
+   border: none;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-btn:hover {
+   background-color: #2ecc71;
+   transform: translateY(-3px);
+}
+
+.create-btn:focus {
+   outline: none;
+   box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.5);
+}
+
+.create-btn:active {
+   background-color: #16a085;
+   transform: translateY(1px);
+}
+
+.style-celulares .create-btn {
+   position: absolute;
+   top: 20px;
+   left: 20px;
+   z-index: 10;
+}
+
+.style-usuarios {
+   display: flex;
+   text-align: center;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.style-usuarios h1 {
+   color: #ffd900;
+   font-weight: bold;
+   font-size: 55px;
+   text-shadow: -2px -1px 9px rgba(206, 175, 0, 0.904);
+}
+
+/* Estilos del modal */
+.modal {
+   background-color: rgba(0, 0, 0, 0.5);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.modal-content {
+   background-color: #fff;
+   padding: 20px; /* Reducido el padding para que no ocupe tanto espacio */
+   border-radius: 8px;
+   width: 550px;
+   max-height: 400px; /* Limité la altura del modal */
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+   overflow-y: auto; /* Permitimos el desplazamiento si es necesario */
+}
+
+.modal h2 {
+   color: #3498db;
+   text-align: center;
+   margin-bottom: 2px; /* Reduje el margen */
+}
+
+.modal p {
+   font-size: 1rem;
+   color: black;
+   margin-bottom: 1px; /* Reducido el margen entre párrafos */
+}
+
+.modal ul {
+   list-style-type: none;
+   padding: 0;
+   display: flex; /* Alinea los elementos en fila */
+   gap: 6px; /* Reduje el espacio entre las imágenes */
+   flex-wrap: wrap; /* Asegura que las imágenes no se desborden */
+   justify-content: flex-start; /* Alinea los elementos al principio */
+}
+
+.modal ul li {
+   display: flex;
+   align-items: center;
+   margin-bottom: 0; /* Elimina el margen inferior */
+}
+
+.modal ul li img {
+   width: fit-content;
+   height: 200px;
+}
+
+/* Reducir espacio en el botón */
+.modal button {
+   background-color: #e74c3c;
+   color: #fff;
+   padding: 8px 16px; /* Reducido el padding */
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   margin-top: 15px; /* Reducido el margen superior */
+   display: block;
+   width: 100%;
+   text-align: center;
+}
+
+.modal button:hover {
+   background-color: #c0392b;
+}
+
+.colors-list{
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+}
+
+.colors-item{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-bottom: 20px;
+}
+
+.colors-item img{
+   width: 150px;
+   height: auto;
+   margin-bottom: 5px;
+}
+
+.colors-item p{
+   font-size: 16px;
+   margin: 0;
+   text-align: center;
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+   #search, #search-u {
+      width: 80%;
+   }
+}
+
+@media (max-width: 768px) {
+   #search, #search-u {
+      width: 70%;
+   }
+}
+
+@media (max-width: 480px) {
+   .style-celulares h1, .style-usuarios h1 {
+      font-size: 35px;
+   }
+   #search, #btn-search, #search-u, #btn-search-u {
+      width: 100%;
+      font-size: 16px;
+   }
+   .results-card, .results-card-u, .edit-form {
+      width: 90%;
+      padding: 10px;
+   }
+}

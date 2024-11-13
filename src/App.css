@@ -1,0 +1,8 @@
+#style-all {
+  background: url("../public/images/background-app.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+#root {
+  width: 100%;
+}

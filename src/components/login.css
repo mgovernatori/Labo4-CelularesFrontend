@@ -1,0 +1,192 @@
+.container-form{
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.container-form h1{
+   color: #ffd900;
+   font-weight: bold;
+   font-size: 55px;
+   font-weight: bold;
+   text-shadow: -2px -1px 9px rgba(206, 175, 0, 0.904);
+}
+
+.login-form {
+   width: 300px;
+   padding: 20px;
+   border-radius: 10px;
+   background-color: #e4e4e4;
+   box-shadow: 10px 15px 35px rgba(0, 0, 0, 0.9);
+   font-family: Arial, sans-serif;
+   margin-bottom: 8px;
+}
+
+.login-user {
+   display: flex;
+   justify-content: center;
+   font-weight: bold;
+   color: #333;
+   margin-bottom: 3px;
+   font-size: 14px;
+}
+
+.login-user input[type="text"],
+.login-user input[type="password"] {
+   width: 290px;
+   padding: 15px;
+   margin-top: 5px;
+   border: 1px solid #ddd;
+   background-color: rgb(255, 255, 255);
+   color: black;
+   border-radius: 5px;
+   font-size: 17px;
+   box-sizing: border-box;
+   transition: border-color 0.3s ease;
+}
+
+.buttons-users {
+   display: flex;
+   justify-content: center;
+   gap: 20px;
+}
+
+.button-login{
+   margin-top: 5px;
+   width: 130px;
+   padding: 12px;
+   border: none;
+   border-radius: 4px;
+   font-size: 16px;
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.button-login {
+   background-color: #0866FF;
+   color: white;
+}
+
+.button-login:hover {
+   background-color: #0057e2;
+}
+
+.link-user {
+   display: flex;
+   justify-content: flex-end;
+   margin-right: 110px;
+   margin-top: 3px;
+}
+
+.link-user li {
+   list-style: none;
+   margin: 10px;
+}
+
+.link-user li a {
+   text-decoration: none;
+   color: #000000;
+   font-weight: bolder;
+}
+
+.link-user li a:hover {
+   text-decoration: underline;
+}
+
+.modal {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 1000; /* Asegura que el modal esté al frente */
+}
+
+.modal-content {
+   background-color: #ffffff;
+   border-radius: 10px;
+   padding: 20px 30px;
+   width: 500px;
+   max-width: 400px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+   text-align: center;
+   animation: fadeIn 0.3s ease-in-out;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+      transform: scale(0.9);
+   }
+   to {
+      opacity: 1;
+      transform: scale(1);
+   }
+}
+
+.modal-content h2 {
+   font-size: 24px;
+   color: #2c3e50;
+   margin-bottom: 20px;
+}
+
+.modal-content input[type="text"] {
+   width: 100%;
+   padding: 10px;
+   margin-bottom: 15px;
+   border: 1px solid #bdc3c7;
+   border-radius: 4px;
+   font-size: 16px;
+   outline: none;
+   transition: border-color 0.2s;
+}
+
+.modal-content input[type="text"]:focus {
+   border-color: #3498db;
+}
+
+/* Botón de confirmación */
+.modal-content button {
+   background-color: #3498db; /* Fondo azul */
+   color: #ffffff;
+   padding: 10px 20px;
+   font-size: 16px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   transition: background-color 0.2s;
+}
+
+.modal-content button:hover {
+   background-color: #2980b9; /* Azul más oscuro al pasar el cursor */
+}
+
+.modal-content .error-message {
+   color: #e74c3c; /* Rojo para mensajes de error */
+   font-size: 14px;
+   margin-top: 10px;
+}
+
+@media (max-width: 1075px) {
+   .container-form h1{
+      top: 10px;
+      left: 250px;
+      display: flex;
+      align-items: center;
+      font-size: 45px;
+   }
+
+   .container-form{
+      display: flex;
+      align-items: center;
+   }
+}
