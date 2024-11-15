@@ -15,9 +15,109 @@ export default function Celulares() {
    const [detailsModalVisible, setDetailsModalVisible] = useState(false);
    const [editModalVisible, setEditModalVisible] = useState(false);
    const [celularDetalle, setCelularDetalle] = useState(null);
+   const [showCreateModal, setShowCreateModal] = useState(false); // Estado para el modal de creación
+   const [newCelular, setNewCelular] = useState({
+      modelo: "",
+      idMarca: 0,
+      almacenamiento: "",
+      precio: "",
+      fechaLanzamiento: "",
+      procesador: "",
+      pantalla: "",
+      camara: "",
+      ram: "",
+      bateria: "",
+      idSistema: 0,
+      colores: [],
+   });
+   const marcas = [
+      { id: 1, nombre: "Samsung" },
+      { id: 2, nombre: "Apple" },
+      { id: 3, nombre: "Motorola" },
+      { id: 4, nombre: "Xiaomi" },
+      { id: 5, nombre: "Google" },
+   ];
+
+   const sistemasOperativos = [
+      { id: 1, nombre: "Android" },
+      { id: 2, nombre: "iOS" },
+   ];
 
    const { user } = useAuthStore((state) => state);
    const isAdmin = user?.roles?.some((role) => role.nombre === "Administrador");
+
+   const handleInputChange = (event) => {
+      const { name, value } = event.target;
+
+      if (name === "colores") {
+         setNewCelular((prevCelular) => ({
+            ...prevCelular,
+            nombreColor: value,
+         }));
+      } else if (name === "urlImagen") {
+         setNewCelular((prevCelular) => ({
+            ...prevCelular,
+            urlImagen: value,
+         }));
+      } else {
+         setNewCelular((prevCelular) => ({
+            ...prevCelular,
+            [name]:
+               name === "idMarca" || name === "idSistema"
+                  ? Number(value)
+                  : value,
+         }));
+      }
+   };
+
+   const handleCreateButtonClick = () => {
+      setShowCreateModal(true);
+   };
+
+   const handleCloseModal = () => {
+      setShowCreateModal(false);
+   };
+
+   const handleCreateCelular = async (e) => {
+      e.preventDefault();
+
+      const transformedCelular = {
+         idMarca: newCelular.idMarca,
+         modelo: newCelular.modelo,
+         fechaLanzamiento: newCelular.fechaLanzamiento,
+         idSistema: newCelular.idSistema,
+         procesador: newCelular.procesador,
+         pantalla: newCelular.pantalla,
+         camara: newCelular.camara,
+         almacenamiento: newCelular.almacenamiento,
+         ram: newCelular.ram,
+         bateria: newCelular.bateria,
+         colores: newCelular.colores.map((color) => ({
+            nombreColor: color.nombreColor,
+            urlImagen: color.urlImagen,
+         })),
+         precio: newCelular.precio,
+      };
+
+      try {
+         const response = await axios.post(
+            `${apiUrl}/celulares`,
+            transformedCelular,
+            {
+               headers: {
+                  "Content-Type": "application/json",
+               },
+            }
+         );
+
+         console.log("Celular creado:", response.data);
+         setShowCreateModal(false);
+         fetchCelulares();
+      } catch (err) {
+         console.error("Error al crear el celular:", err.message);
+         alert("Hubo un error al crear el celular");
+      }
+   };
 
    const handleSearchChange = (event) => setSearchTerm(event.target.value);
 
@@ -68,11 +168,12 @@ export default function Celulares() {
    };
 
    const handleEditChange = (e) => {
-      const {name, value } = e.target;
+      const { name, value } = e.target;
       if (name.startsWith("urlImagen-")) {
-         const index = parseInt(name.split("-")[1], 10); 
-         const updatedColores = editingCelular.colores.map((color, colorIndex) =>
-            colorIndex === index ? { ...color, urlImagen: value } : color
+         const index = parseInt(name.split("-")[1], 10);
+         const updatedColores = editingCelular.colores.map(
+            (color, colorIndex) =>
+               colorIndex === index ? { ...color, urlImagen: value } : color
          );
          setEditingCelular({
             ...editingCelular,
@@ -127,9 +228,7 @@ export default function Celulares() {
    };
 
    const handleDelete = async (id) => {
-      const confirmDelete = window.confirm(
-         "¿Eliminar?"
-      );
+      const confirmDelete = window.confirm("¿Eliminar?");
       if (confirmDelete) {
          try {
             await axios.delete(`${apiUrl}/celulares/${id}`);
@@ -140,10 +239,138 @@ export default function Celulares() {
       }
    };
 
+   const campos = [
+      { label: "Modelo", name: "modelo", type: "text" },
+      { label: "Fecha de Lanzamiento", name: "fechaLanzamiento", type: "date" },
+      { label: "Procesador", name: "procesador", type: "text" },
+      { label: "Pantalla", name: "pantalla", type: "text" },
+      { label: "Cámara", name: "camara", type: "text" },
+      { label: "Almacenamiento", name: "almacenamiento", type: "text" },
+      { label: "RAM", name: "ram", type: "text" },
+      { label: "Batería", name: "bateria", type: "text" },
+      { label: "Precio", name: "precio", type: "text" },
+   ];
+
    return (
       <div className="style-celulares">
          <h1>CELULARES</h1>
-         <button className="create">Crear Celular</button>
+
+         {isAdmin && (
+            <>
+               <button className="create" onClick={handleCreateButtonClick}>
+                  Crear Celular
+               </button>
+            </>
+         )}
+
+         {showCreateModal && (
+            <div className="modal">
+               <div className="modal-content">
+                  <h2>Crear Nuevo Celular</h2>
+                  <form onSubmit={handleCreateCelular}>
+                     {campos.map((campo) => (
+                        <div key={campo.name}>
+                           <label>{campo.label}:</label>
+                           <input
+                              type={campo.type}
+                              name={campo.name}
+                              value={newCelular[campo.name]}
+                              onChange={handleInputChange}
+                           />
+                        </div>
+                     ))}
+                     <div>
+                        <label>Marca:</label>
+                        <select
+                           name="idMarca"
+                           value={newCelular.idMarca}
+                           onChange={handleInputChange}
+                        >
+                           <option value="">Seleccionar marca</option>
+                           {marcas.map((marca) => (
+                              <option key={marca.id} value={marca.id}>
+                                 {marca.nombre}
+                              </option>
+                           ))}
+                        </select>
+                     </div>
+                     <div>
+                        <label>Sistema Operativo:</label>
+                        <select
+                           name="idSistema"
+                           value={newCelular.idSistema}
+                           onChange={handleInputChange}
+                        >
+                           <option value="">
+                              Seleccionar sistema operativo
+                           </option>
+                           {sistemasOperativos.map((sistema) => (
+                              <option key={sistema.id} value={sistema.id}>
+                                 {sistema.nombre}
+                              </option>
+                           ))}
+                        </select>
+                     </div>
+                     <div>
+                        <label>Colores:</label>
+                        <div>
+                           <input
+                              type="text"
+                              name="colores"
+                              placeholder="Escribe el nombre del color"
+                              value={newCelular.nombreColor}
+                              onChange={handleInputChange}
+                           />
+                        </div>
+                        <div>
+                           <label>URL Imagen del Color:</label>
+                           <input
+                              type="text"
+                              name="urlImagen"
+                              value={newCelular.urlImagen}
+                              onChange={handleInputChange}
+                           />
+                        </div>
+                        <button
+                           type="button"
+                           onClick={() => {
+                              if (
+                                 newCelular.nombreColor &&
+                                 newCelular.urlImagen
+                              ) {
+                                 setNewCelular((prevCelular) => ({
+                                    ...prevCelular,
+                                    colores: [
+                                       ...prevCelular.colores,
+                                       {
+                                          nombreColor: newCelular.nombreColor,
+                                          urlImagen: newCelular.urlImagen,
+                                       },
+                                    ],
+                                    nombreColor: "",
+                                    urlImagen: "",
+                                 }));
+                              } else {
+                                 alert(
+                                    "Por favor ingrese un nombre de color y una URL de imagen."
+                                 );
+                              }
+                           }}
+                        >
+                           Agregar Color
+                        </button>
+                     </div>
+                     <div>
+                        <button type="submit">Crear Celular</button>
+                        <button type="button" onClick={handleCloseModal}>
+                           Cancelar
+                        </button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         )}
+
          <section className="search-phone">
             <form onSubmit={handleSearchSubmit}>
                <input
@@ -260,23 +487,11 @@ export default function Celulares() {
             <div className="modal">
                <div className="modal-content">
                   <h2>Editar Celular</h2>
-                  {[
-                     { label: "Modelo", name: "modelo" },
-                     { label: "Almacenamiento", name: "almacenamiento" },
-                     { label: "Precio", name: "precio" },
-                     {
-                        label: "Fecha de Lanzamiento",
-                        name: "fechaLanzamiento",
-                     },
-                     { label: "Procesador", name: "procesador" },
-                     { label: "Pantalla", name: "pantalla" },
-                     { label: "Cámara", name: "camara" },
-                     { label: "RAM", name: "ram" },
-                     { label: "Batería", name: "bateria" },
-                  ].map(({ label, name }) => (
+                  {campos.map(({ label, name, type }) => (
                      <div key={name}>
                         <label>{label}:</label>
                         <input
+                           type={type || "text"}
                            name={name}
                            value={editingCelular[name]}
                            onChange={handleEditChange}
@@ -300,12 +515,11 @@ export default function Celulares() {
                            <input
                               name={`urlImagen-${index}`}
                               value={color.urlImagen}
-                              onChange={handleEditChange}
+                              onChange={(e) => handleEditChange(e, index)}
                            />
                         </div>
                      ))}
                   </div>
-
                   <button onClick={handleSaveChanges}>Guardar Cambios</button>
                   <button onClick={closeEditModal}>Cancelar</button>
                </div>

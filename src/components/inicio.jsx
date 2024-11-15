@@ -22,14 +22,9 @@ export default function Inicio() {
       <div className="inicio-container">
          <h1 className="inicio-title">Bienvenido/a {user?.nombre}</h1>
          <ul className="link-user">
-            {isUser || isAdmin && (
+            {(isUser || isAdmin) && (
                <li className="link-item">
                   <Link to="/celulares" className="link">Ir a Celulares →</Link>
-               </li>
-            )}
-            {isAdmin && (
-               <li className="link-item">
-                  <Link to="/usuarios" className="link">Ir a Usuarios →</Link>
                </li>
             )}
          </ul>
